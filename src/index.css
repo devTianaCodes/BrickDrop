@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply bg-slate-950 text-slate-100;
+  @apply bg-[#12031f] text-slate-100;
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 

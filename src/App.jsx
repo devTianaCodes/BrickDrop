@@ -323,7 +323,7 @@ export default function App() {
   }, [ghostPiece]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-10 text-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#12031f] via-[#1c0730] to-[#0b0016] px-4 py-10 text-slate-100">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 lg:flex-row lg:items-start">
         <div className="flex-1">
           <h1 className="font-display text-4xl uppercase tracking-wide text-white">Brick Drop</h1>
@@ -332,8 +332,8 @@ export default function App() {
             rotate, Space for hard drop, and P to pause.
           </p>
 
-          <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-xs uppercase tracking-widest">
-            <span className="text-slate-400">Status</span>
+          <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-violet-500/40 bg-violet-500/10 px-4 py-2 text-xs uppercase tracking-widest">
+            <span className="text-violet-200">Status</span>
             <span className="font-semibold text-white">{statusLabel}</span>
           </div>
 
@@ -341,14 +341,14 @@ export default function App() {
             <button
               type="button"
               onClick={startGame}
-              className="rounded-full bg-white px-5 py-2 text-xs font-semibold uppercase tracking-widest text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-200"
+              className="rounded-full bg-orange-400 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-slate-950 transition hover:-translate-y-0.5 hover:bg-orange-300"
             >
               {status === "gameover" ? "Restart" : "Start"}
             </button>
             <button
               type="button"
               onClick={togglePause}
-              className="rounded-full border border-slate-600 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-white transition hover:-translate-y-0.5 hover:border-slate-300"
+              className="rounded-full border border-violet-400 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-violet-100 transition hover:-translate-y-0.5 hover:border-violet-200 hover:text-white"
               disabled={status !== "running" && status !== "paused"}
             >
               {status === "paused" ? "Resume" : "Pause"}
@@ -369,7 +369,7 @@ export default function App() {
           </div>
 
           <div
-            className="grid gap-1 rounded-2xl border border-slate-700 bg-board-900 p-3 shadow-2xl"
+            className="grid gap-1 rounded-2xl border border-violet-400 bg-board-900 p-3 shadow-2xl"
             style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
           >
             {displayBoard.map((row, rowIndex) =>
@@ -379,7 +379,7 @@ export default function App() {
                 return (
                   <div
                     key={`${rowIndex}-${colIndex}`}
-                    className={`h-6 w-6 rounded-sm border border-slate-800 ${
+                    className={`h-6 w-6 rounded-sm border border-orange-400/70 ${
                       cell === 0 ? "bg-board-900" : CELL_COLORS[cell]
                     }`}
                   >
