@@ -163,6 +163,15 @@ export default function App() {
   const [score, setScore] = useState(0);
   const intervalRef = useRef(null);
 
+  const ghostPiece = useMemo(() => {
+    if (!active) return null;
+    let nextY = active.y;
+    while (canPlace(board, active.shape, active.x, nextY + 1)) {
+      nextY += 1;
+    }
+    return { ...active, y: nextY };
+  }, [board, active]);
+
   const displayBoard = useMemo(() => {
     if (!active) return board;
     return mergePiece(board, active);
@@ -297,6 +306,22 @@ export default function App() {
       ? "Game Over"
       : "Ready";
 
+  const ghostCells = useMemo(() => {
+    if (!ghostPiece) return new Set();
+    const cells = new Set();
+    ghostPiece.shape.forEach((row, rowIndex) => {
+      row.forEach((cell, colIndex) => {
+        if (!cell) return;
+        const y = ghostPiece.y + rowIndex;
+        const x = ghostPiece.x + colIndex;
+        if (y >= 0 && y < ROWS && x >= 0 && x < COLS) {
+          cells.add(`${y}-${x}`);
+        }
+      });
+    });
+    return cells;
+  }, [ghostPiece]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-10 text-slate-100">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 lg:flex-row lg:items-start">
@@ -348,12 +373,22 @@ export default function App() {
             style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
           >
             {displayBoard.map((row, rowIndex) =>
-              row.map((cell, colIndex) => (
-                <div
-                  key={`${rowIndex}-${colIndex}`}
-                  className={`h-6 w-6 rounded-sm border border-slate-800 ${CELL_COLORS[cell]}`}
-                />
-              ))
+              row.map((cell, colIndex) => {
+                const isGhost =
+                  cell === 0 && ghostCells.has(`${rowIndex}-${colIndex}`);
+                return (
+                  <div
+                    key={`${rowIndex}-${colIndex}`}
+                    className={`h-6 w-6 rounded-sm border border-slate-800 ${
+                      cell === 0 ? "bg-board-900" : CELL_COLORS[cell]
+                    }`}
+                  >
+                    {isGhost ? (
+                      <div className="h-full w-full rounded-sm border border-white/40 bg-white/10" />
+                    ) : null}
+                  </div>
+                );
+              })
             )}
           </div>
         </div>
