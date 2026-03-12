@@ -473,10 +473,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#0a0014] via-[#2a0650] to-[#0a0014] px-4 py-10 text-slate-100">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 md:flex-row md:items-start">
-        <div className="order-1 flex-1 text-center pt-4 md:pt-[50px]">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 md:flex-row md:items-start md:gap-8">
+        <div className="order-1 flex-1 text-center pt-1 md:pt-[50px]">
           <h1 className="text-4xl uppercase tracking-wide text-orange-400">Brick Drop</h1>
-          <p className="mt-4 text-sm text-slate-300">
+          <p className="mt-2 text-sm text-slate-300 md:mt-4">
             <span className="block pb-6">Classic Tetris</span>
             <span className="hidden pb-10 pt-10 lg:block">
               Use arrows to move,
@@ -492,13 +492,13 @@ export default function App() {
           <button
             type="button"
             onClick={() => setShowHelp((prev) => !prev)}
-            className="mt-4 inline-flex items-center justify-center rounded-full border border-violet-400 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-orange-400 transition hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-400/20 hover:text-orange-300 lg:hidden"
+            className="mt-2 inline-flex items-center justify-center rounded-full border border-violet-400 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-orange-400 transition hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-400/20 hover:text-orange-300 lg:hidden"
           >
             {showHelp ? "Hide Controls" : "Show Controls"}
           </button>
 
           {showHelp ? (
-            <p className="mt-4 text-sm text-slate-300 lg:hidden">
+            <p className="mt-2 text-sm text-slate-300 lg:hidden">
               Use arrows to move,
               <br />
               Up or X to rotate,
@@ -509,7 +509,7 @@ export default function App() {
             </p>
           ) : null}
 
-          <div className="mt-8 text-xs uppercase tracking-widest text-slate-300">
+          <div className="mt-4 text-xs uppercase tracking-widest text-slate-300 md:mt-8">
             Status:{" "}
             <span
               className={`font-semibold ${
@@ -520,7 +520,7 @@ export default function App() {
             </span>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 md:mt-10 md:gap-4">
             <button
               type="button"
               onClick={startGame}
@@ -568,8 +568,8 @@ export default function App() {
           </div>
         </div>
 
-        <div className="order-2 mx-auto flex w-full max-w-none flex-row gap-4 pt-4 md:order-3 md:ml-5 md:mx-0 md:max-w-xs md:flex-col md:gap-4 md:pt-[50px]">
-          <div className="w-1/2 rounded-2xl border border-violet-400 bg-board-800 p-3 flex flex-col items-center md:w-auto md:p-4">
+        <div className="order-2 mx-auto flex w-full max-w-none flex-row gap-2 pt-3 md:order-3 md:ml-5 md:mx-0 md:max-w-xs md:flex-col md:gap-4 md:pt-[50px]">
+          <div className="w-1/2 rounded-2xl border border-violet-400 bg-board-800 p-2 flex flex-col items-center md:w-auto md:p-4">
             <p className="text-xs uppercase tracking-widest text-slate-400">Next</p>
             <div
               className="mt-4 inline-grid gap-1 rounded-xl bg-board-900 p-2 mb-5"
@@ -606,36 +606,36 @@ export default function App() {
             </div>
           </div>
 
-          <div className="w-1/2 rounded-2xl border border-violet-400 bg-board-800 p-3 text-center md:w-auto md:p-4">
+          <div className="w-1/2 rounded-2xl border border-violet-400 bg-board-800 p-2 text-center md:w-auto md:p-4">
             <p className="text-xs uppercase tracking-widest text-slate-400">
               <span className="block pb-6">Stats</span>
             </p>
-            <div className="grid grid-cols-2 gap-3 pb-5 text-sm text-slate-200">
+            <div className="grid grid-cols-2 gap-2 pb-2 text-sm text-slate-200 md:gap-3 md:pb-5">
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Score</p>
-                <p className="mt-1 font-display text-2xl text-white">{score}</p>
+                <p className="mt-1 text-xs text-white md:font-display md:text-2xl">{score}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Board</p>
-                <p className="mt-1 font-display text-2xl text-white">
+                <p className="mt-1 text-xs text-white md:font-display md:text-2xl">
                   {COLS} x {ROWS}
                 </p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Level</p>
-                <p className="mt-1 font-display text-2xl text-white">{level}</p>
+                <p className="mt-1 text-xs text-white md:font-display md:text-2xl">{level}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Lines</p>
-                <p className="mt-1 font-display text-2xl text-white">{lines}</p>
+                <p className="mt-1 text-xs text-white md:font-display md:text-2xl">{lines}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">High</p>
-                <p className="mt-1 font-display text-2xl text-white">{highScore}</p>
+                <p className="mt-1 text-xs text-white md:font-display md:text-2xl">{highScore}</p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Speed</p>
-                <p className="mt-1 font-display text-2xl text-white">
+                <p className="mt-1 text-xs text-white md:font-display md:text-2xl">
                   {Math.round(1000 / dropInterval)}x
                 </p>
               </div>
