@@ -425,19 +425,8 @@ export default function App() {
         </div>
 
         <div className="flex flex-1 flex-col items-center gap-4">
-          <div className="flex w-full items-center justify-between">
-            <div className="rounded-xl border border-slate-800 bg-board-800 px-4 py-3">
-              <p className="text-xs uppercase tracking-widest text-slate-400">Score</p>
-              <p className="mt-1 font-display text-3xl text-white">{score}</p>
-            </div>
-            <div className="rounded-xl border border-slate-800 bg-board-800 px-4 py-3 text-right">
-              <p className="text-xs uppercase tracking-widest text-slate-400">Board</p>
-              <p className="mt-1 text-sm text-slate-200">{COLS} x {ROWS}</p>
-            </div>
-          </div>
-
           <div
-            className="grid gap-1 rounded-2xl border border-violet-400 bg-board-900 p-3 shadow-2xl"
+            className="grid gap-1 rounded-2xl border border-violet-400 bg-board-900 p-2 shadow-2xl"
             style={{ gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))` }}
           >
             {displayBoard.map((row, rowIndex) =>
@@ -447,7 +436,7 @@ export default function App() {
                 return (
                   <div
                     key={`${rowIndex}-${colIndex}`}
-                    className={`h-6 w-6 rounded-sm border border-orange-400/70 ${
+                    className={`h-7 w-7 rounded-sm border border-orange-400/70 ${
                       cell === 0 ? "bg-board-900" : CELL_COLORS[cell]
                     }`}
                   >
@@ -465,6 +454,14 @@ export default function App() {
           <div className="rounded-2xl border border-violet-400/60 bg-board-800 p-4">
             <p className="text-xs uppercase tracking-widest text-slate-400">Stats</p>
             <div className="mt-3 grid grid-cols-2 gap-3 text-sm text-slate-200">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-slate-400">Score</p>
+                <p className="mt-1 font-display text-2xl text-white">{score}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-widest text-slate-400">Board</p>
+                <p className="mt-1 text-sm text-slate-200">{COLS} x {ROWS}</p>
+              </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Level</p>
                 <p className="mt-1 font-display text-2xl text-white">{level}</p>
