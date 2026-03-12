@@ -396,8 +396,8 @@ export default function App() {
         <div className="flex-1">
           <h1 className="font-display text-4xl uppercase tracking-wide text-white">Brick Drop</h1>
           <p className="mt-2 text-sm text-slate-300">
-            Classic Tetris with a clean, minimal HUD. Use arrows to move, Up or X to
-            rotate, Space for hard drop, and P to pause.
+            <span className="block pb-6">Classic Tetris.</span>
+            Use arrows to move, Up or X to rotate, Space for hard drop, and P to pause.
           </p>
 
           <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-violet-500/40 bg-violet-500/10 px-4 py-2 text-xs uppercase tracking-widest">
@@ -452,8 +452,10 @@ export default function App() {
 
         <div className="w-full max-w-xs space-y-4">
           <div className="rounded-2xl border border-violet-400/60 bg-board-800 p-4">
-            <p className="text-xs uppercase tracking-widest text-slate-400">Stats</p>
-            <div className="mt-3 grid grid-cols-2 gap-3 text-sm text-slate-200">
+            <p className="text-xs uppercase tracking-widest text-slate-400">
+              <span className="block pb-6">Stats</span>
+            </p>
+            <div className="grid grid-cols-2 gap-3 text-sm text-slate-200">
               <div>
                 <p className="text-xs uppercase tracking-widest text-slate-400">Score</p>
                 <p className="mt-1 font-display text-2xl text-white">{score}</p>
