@@ -421,6 +421,18 @@ export default function App() {
     };
   }, [nextPiece]);
 
+  const nextPreviewDims = useMemo(() => {
+    if (!nextBounds) return { rows: 4, cols: 6, startRow: 0, startCol: 0 };
+    const rows = 4;
+    const cols = 6;
+    return {
+      rows,
+      cols,
+      startRow: Math.floor((rows - nextBounds.rows) / 2),
+      startCol: Math.floor((cols - nextBounds.cols) / 2),
+    };
+  }, [nextBounds]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#12031f] via-[#1c0730] to-[#0b0016] px-4 py-10 text-slate-100">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 lg:flex-row lg:items-start">
@@ -482,37 +494,41 @@ export default function App() {
         </div>
 
         <div className="w-full max-w-xs space-y-4">
-          <div className="rounded-2xl border border-violet-400/60 bg-board-800 p-4">
+          <div className="rounded-2xl border border-violet-400/60 bg-board-800 p-4 flex flex-col items-center">
             <p className="text-xs uppercase tracking-widest text-slate-400">Next</p>
             <div
               className="mt-4 inline-grid gap-1 rounded-xl bg-board-900 p-2"
               style={{
-                gridTemplateColumns: nextBounds
-                  ? `repeat(${nextBounds.cols}, minmax(0, 1fr))`
-                  : "repeat(4, minmax(0, 1fr))",
+                gridTemplateColumns: `repeat(${nextPreviewDims.cols}, minmax(0, 1fr))`,
               }}
             >
               {nextBounds
-                ? Array.from({ length: nextBounds.rows * nextBounds.cols }).map(
-                    (_, index) => {
-                      const row = Math.floor(index / nextBounds.cols);
-                      const col = index % nextBounds.cols;
-                      const filled =
-                        nextPiece?.shape?.[row + nextBounds.minRow]?.[
-                          col + nextBounds.minCol
-                        ];
-                      return (
-                        <div
-                          key={`${row}-${col}`}
-                          className={`h-5 w-5 rounded-sm border border-orange-400/70 ${
-                            filled && nextPiece
-                              ? CELL_COLORS[nextPiece.id]
-                              : "bg-board-900"
-                          }`}
-                        />
-                      );
-                    }
-                  )
+                ? Array.from({
+                    length: nextPreviewDims.rows * nextPreviewDims.cols,
+                  }).map((_, index) => {
+                    const row = Math.floor(index / nextPreviewDims.cols);
+                    const col = index % nextPreviewDims.cols;
+                    const shapeRow =
+                      row - nextPreviewDims.startRow + nextBounds.minRow;
+                    const shapeCol =
+                      col - nextPreviewDims.startCol + nextBounds.minCol;
+                    const filled =
+                      shapeRow >= nextBounds.minRow &&
+                      shapeRow <= nextBounds.maxRow &&
+                      shapeCol >= nextBounds.minCol &&
+                      shapeCol <= nextBounds.maxCol &&
+                      nextPiece?.shape?.[shapeRow]?.[shapeCol];
+                    return (
+                      <div
+                        key={`${row}-${col}`}
+                        className={`h-5 w-5 rounded-sm border border-orange-400/70 ${
+                          filled && nextPiece
+                            ? CELL_COLORS[nextPiece.id]
+                            : "bg-board-900"
+                        }`}
+                      />
+                    );
+                  })
                 : null}
             </div>
           </div>
